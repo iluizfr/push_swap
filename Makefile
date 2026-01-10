@@ -3,7 +3,7 @@ FLAG = -Wall -Wextra -Werror
 CC   = cc
 AR   = ar rcs
 
-SRCS = 
+SRCS = push_swap.c push_swap_utils.c list_function.c ft_split.c 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

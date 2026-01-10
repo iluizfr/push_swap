@@ -14,14 +14,40 @@
 
 int main(int argc, char **argv)
 {
-    t_list *a;
-    t_list *b;
-    
-    argc = 1;
-    while(argc)
+    int     i;
+    int     j;
+    t_list  *a;
+    t_list  *tmp;
+    int     flag;
+    char    **array;
+
+    i = 1;
+    a = NULL;
+    while(i < argc)
     {
-        a = ft_atoi(argv[argc]);
-        argv++;
+        flag = verify_arg(argv[i]);
+            if (flag < 0)
+            {
+                write(2, "Error\n", 6);
+                return (1);
+            }
+        if (word_count(argv[i]) != 1)
+        {
+            j = 0;
+            array = ft_split(argv[i]);
+            while (array[j])
+                ft_lstadd_back(&a, ft_lstnew(ft_atoi(array[j++])));
+            i++;
+            free_array(array);
+        }
+        ft_lstadd_back(&a, ft_lstnew(ft_atoi(argv[i++])));
+    }
+    printl(a);
+    while(a)
+    {
+        tmp = a->next;
+        free(a);
+        a = tmp;
     }
     return(0);
 }
