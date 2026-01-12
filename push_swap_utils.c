@@ -6,47 +6,11 @@
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:32:52 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/07 16:44:50 by lde-frei         ###   ########.fr       */
+/*   Updated: 2026/01/12 18:19:26 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int     is_digit(char c)
-{
-    return (c >= '0' && c <= '9');
-}
-
-int     is_space(char c)
-{
-    return(c == 32 || (c >= 9 && c <= 13));
-}
-
-int     ft_atoi(char *nptr)
-{
-    int i;
-    int sin;
-    int resul;
-
-    i = 0;
-    sin = 1;
-    resul = 0;
-    while(is_space(nptr[i]))
-        i++;
-    if (nptr[i] == '+' || nptr[i] == '-')
-    {
-        if (nptr[i] == '-')
-            sin = -1;
-        i++;
-    }
-    while(nptr[i] && is_digit(nptr[i]))
-    {
-        resul *= 10;
-        resul += nptr[i] - '0';
-        i++;
-    }
-    return (resul * sin);
-}
 
 int     verify_arg(char *arg)
 {
@@ -57,14 +21,16 @@ int     verify_arg(char *arg)
     {
         if(!is_digit(arg[i]) && !is_space(arg[i]) && arg[i] != '-' && arg[i] != '+')
             return (-1);
-        else if((arg[i] == '+' || arg[i] == '-') && !is_digit(arg[i + 1]))
+        else if((arg[i] == '+' || arg[i] == '-') && !is_digit(arg[i++]))
+            return (-1);
+        else if(!is_space(arg[i]) || !is_digit(arg[i]) || arg[i] != '\0')
             return (-1);
         i++;
     }
     return (0);
 }
 
-void    printl(t_list *stack)
+void    print_stack(t_list *stack)
 {
     t_list *tmp;
 
@@ -75,3 +41,47 @@ void    printl(t_list *stack)
         tmp = tmp->next;
     }
 }
+
+void    creat_stack(t_list **a, int argc, char **argv)
+{
+    char    **array;
+    int     i;
+    int     j;
+    
+    i = 1;
+    while (i < argc)
+    {
+        if ((verify_arg(argv[i])) < 0)
+        {
+            clear_stack(a);
+            write(2, "Error\n", 6);
+            exit(EXIT_FAILURE);
+        }
+        if (word_count(argv[i]) != 1)
+        {
+            j = 0;
+            array = ft_split(argv[i]);
+            while (array[j])
+                ft_lstadd_back(a, ft_lstnew(ft_atoi(array[j++])));
+            i++;
+            free_array(array);
+        }
+        else
+            ft_lstadd_back(a, ft_lstnew(ft_atoi(argv[i++])));
+    }
+}
+
+void    clear_stack(t_list **stack)
+{
+    t_list *tmp;
+    
+    if (!stack)
+        return ;
+    while(*stack)
+    {
+        tmp = (*stack)->next;
+        free(*stack);
+        (*stack) = tmp;
+    }
+}
+

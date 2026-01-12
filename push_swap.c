@@ -6,7 +6,7 @@
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:27:40 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/07 16:55:08 by lde-frei         ###   ########.fr       */
+/*   Updated: 2026/01/12 18:19:09 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,17 @@
 
 int main(int argc, char **argv)
 {
-    int     i;
-    int     j;
     t_list  *a;
-    t_list  *tmp;
-    int     flag;
-    char    **array;
+    t_list  *b;
 
-    i = 1;
     a = NULL;
-    while(i < argc)
+    b = NULL;
+    if (argc > 1)
     {
-        flag = verify_arg(argv[i]);
-        if (flag < 0)
-            {
-                write(2, "Error\n", 6);
-                return (1);
-            }
-        if (word_count(argv[i]) != 1)
-        {
-            j = 0;
-            array = ft_split(argv[i]);
-            while (array[j])
-                ft_lstadd_back(&a, ft_lstnew(ft_atoi(array[j++])));
-            i++;
-            free_array(array);
-        }
-        else
-            ft_lstadd_back(&a, ft_lstnew(ft_atoi(argv[i++])));
-    }
-    printl(a);
-    while(a)
-    {
-        tmp = a->next;
-        free(a);
-        a = tmp;
+        creat_stack(&a, argc, argv);
+        check_stack(a);
+        print_stack(a);
+        clear_stack(&a);
     }
     return(0);
 }

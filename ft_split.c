@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/12 16:14:44 by lde-frei          #+#    #+#             */
+/*   Updated: 2026/01/12 17:52:23 by lde-frei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int     word_len(char *str)
@@ -39,32 +51,6 @@ void    free_array(char **array)
     while (array[i])
         free(array[i++]);
     free(array);
-}
-
-char    *ft_substr(const char *str, int start, int len)
-{
-	char	*sub;
-	char	*ptr;
-	int     slen;
-
-	if (!str)
-		return (NULL);
-	slen = 0;
-    while(str[slen])
-        slen++;
-	if (start >= slen)
-		return (malloc(0));
-	if (len > slen - start)
-		len = slen - start;
-	sub = malloc((len + 1) * sizeof(char));
-	if (!sub)
-		return (NULL);
-	ptr = sub;
-	str += start;
-	while (len--)
-		*sub++ = *str++;
-	*sub = '\0';
-	return (ptr);    
 }
 
 char    **ft_split(char *str)

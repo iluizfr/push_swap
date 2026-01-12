@@ -1,41 +1,77 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/12 16:21:22 by lde-frei          #+#    #+#             */
+/*   Updated: 2026/01/12 17:52:38 by lde-frei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int     ft_strcmp(char *s1, char *s2)
+int     is_digit(char c)
 {
-    int i;
-
-    i = 0;
-    while (s1[i] && s1[i] == s2[i])
-        i++;
-    return (s1[i] - s2[i]);
+    return (c >= '0' && c <= '9');
 }
 
-int     check_args(int argc, char **args)
+int     is_space(char c)
+{
+    return(c == 32 || (c >= 9 && c <= 13));
+}
+
+int     ft_atoi(char *nptr)
 {
     int i;
-    int j;
-    int k;
+    int sin;
+    int resul;
 
-    i = 1;
-    while (i < argc)
+    i = 0;
+    sin = 1;
+    resul = 0;
+    while(is_space(nptr[i]))
+        i++;
+    if (nptr[i] == '+' || nptr[i] == '-')
     {
-        j =  i + 1;
-        while (args[j])
-        {
-            if ((ft_strcmp(args[i], args[j])) == 0)
-                return (-1);
-            j++;
-        }
-        k = 0;
-        while (args[i][k])
-        {
-            if(!is_digit(args[i][k]) && !is_space(args[i][k]) && args[i][k] != '-' && args[i][k] != '+')
-                return (-1);
-            else if((args[i][k] == '+' || args[i][k] == '-') && !is_digit(args[i][k + 1]))
-                return (-1);
-            k++;
-        }
+        if (nptr[i] == '-')
+            sin = -1;
         i++;
     }
-    return (0);
+    while(nptr[i] && is_digit(nptr[i]))
+    {
+        resul *= 10;
+        resul += nptr[i] - '0';
+        i++;
+    }
+    return (resul * sin);
+}
+
+char    *ft_substr(const char *str, int start, int len)
+{
+	char	*sub;
+	char	*ptr;
+	int     slen;
+
+	if (!str)
+		return (NULL);
+	slen = 0;
+    while(str[slen])
+    {
+        slen++;
+    }
+	if (start >= slen)
+		return (malloc(0));
+	if (len > slen - start)
+		len = slen - start;
+	sub = malloc((len + 1) * sizeof(char));
+	if (!sub)
+		return (NULL);
+	ptr = sub;
+	str += start;
+	while (len--)
+		*sub++ = *str++;
+	*sub = '\0';
+	return (ptr);    
 }
