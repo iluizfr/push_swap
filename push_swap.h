@@ -25,6 +25,7 @@ typedef struct s_list
 
 // list functions
 void    ft_lstadd_back(t_list **lst, t_list *new);
+int     ft_strcmp(char *s1, char *s2);
 int     ft_lstsize(t_list *lst);
 t_list  *ft_lstlast(t_list *lst);
 t_list  *ft_lstnew(int num);
@@ -39,6 +40,7 @@ int     is_space(char c);
 
 // Personal functions
 int     add_arg(t_list *stack, char *argv);
+int     check_args(int argc, char **args);
 int     verify_arg(char *arg);
 void    printl(t_list *stack);
 

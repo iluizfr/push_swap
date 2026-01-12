@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     while(i < argc)
     {
         flag = verify_arg(argv[i]);
-            if (flag < 0)
+        if (flag < 0)
             {
                 write(2, "Error\n", 6);
                 return (1);
@@ -40,7 +40,8 @@ int main(int argc, char **argv)
             i++;
             free_array(array);
         }
-        ft_lstadd_back(&a, ft_lstnew(ft_atoi(argv[i++])));
+        else
+            ft_lstadd_back(&a, ft_lstnew(ft_atoi(argv[i++])));
     }
     printl(a);
     while(a)
