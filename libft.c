@@ -6,7 +6,7 @@
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 16:21:22 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/12 17:52:38 by lde-frei         ###   ########.fr       */
+/*   Updated: 2026/01/13 18:48:46 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int     ft_atoi(char *nptr)
 {
     int i;
     int sin;
-    int resul;
+    long resul;
 
     i = 0;
     sin = 1;
@@ -44,6 +44,11 @@ int     ft_atoi(char *nptr)
         resul *= 10;
         resul += nptr[i] - '0';
         i++;
+        if ((resul * sin) > MAX_INT || (resul * sin) < MIN_INT)
+        {
+            write(2, "Error\n", 6);
+            exit(EXIT_FAILURE);
+        }
     }
     return (resul * sin);
 }
