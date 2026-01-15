@@ -1,15 +1,14 @@
 NAME = push_swap
 FLAG = -Wall -Wextra -Werror
 CC   = cc
-AR   = ar rcs
 
-SRCS = push_swap.c push_swap_utils.c list_function.c ft_split.c 
+SRCS = push_swap.c push_swap_utils.c list_function.c ft_split.c libft.c 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJ)
+	$(CC)  $(OBJS) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(FLAG) -c $< -o $@

@@ -24,26 +24,24 @@ int     is_space(char c)
 
 int     ft_atoi(char *nptr)
 {
-    int i;
     int sin;
     long resul;
 
-    i = 0;
     sin = 1;
     resul = 0;
-    while(is_space(nptr[i]))
-        i++;
-    if (nptr[i] == '+' || nptr[i] == '-')
+    while(is_space(*nptr))
+        nptr++;
+    if (*nptr == '+' || *nptr == '-')
     {
-        if (nptr[i] == '-')
+        if (*nptr == '-')
             sin = -1;
-        i++;
+        nptr++;
     }
-    while(nptr[i] && is_digit(nptr[i]))
+    while(*nptr && is_digit(*nptr))
     {
         resul *= 10;
-        resul += nptr[i] - '0';
-        i++;
+        resul += *nptr - '0';
+        nptr++;
         if ((resul * sin) > MAX_INT || (resul * sin) < MIN_INT)
         {
             write(2, "Error\n", 6);

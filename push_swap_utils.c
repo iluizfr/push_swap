@@ -70,10 +70,9 @@ void    creat_stack(t_list **a, int argc, char **argv)
         if (word_count(argv[i]) != 1)
         {
             j = 0;
-            array = ft_split(argv[i]);
+            array = ft_split(argv[i++]);
             while (array[j])
                 ft_lstadd_back(a, ft_lstnew(ft_atoi(array[j++])));
-            i++;
             free_array(array);
         }
         else
@@ -89,7 +88,7 @@ void    print_stack(t_list *stack)
     tmp = stack;
     while (tmp)
     {
-        printf(" %d\n", tmp->num);
+        printf("%d\n", tmp->num);
         tmp = tmp->next;
     }
 }
