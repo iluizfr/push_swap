@@ -24,33 +24,10 @@ t_list	*ft_lstnew(int num)
 	return (new);
 }
 
-int	ft_lstsize(t_list *lst)
-{
-	t_list	*tmp;
-	int		len;
-
-	len = 0;
-	tmp = lst;
-	while (tmp)
-	{
-		tmp = tmp->next;
-		len++;
-	}
-	return (len);
-}
-
-t_list	*ft_lstlast(t_list *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*ptr;
+	t_list	*tmp;
 
 	if (!new)
 		return ;
@@ -59,38 +36,37 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		*lst = new;
 		return ;
 	}
-	ptr = ft_lstlast(*lst);
+	tmp = *lst;
+	while (tmp->next)
+		tmp = tmp->next;
+	ptr = tmp;
 	ptr->next = new;
 }
 
-void	creat_stack(t_list **stack, int argc, char **argv)
+void	print_stack(t_list *stack)
 {
-	int		i;
-	int		j;
-	int		res;
-	char	**array;
+	t_list	*tmp;
 
-	i = 1;
-	while (i < argc)
+	if (!stack)
+		return ;
+	tmp = stack;
+	while (tmp)
 	{
-		if (verify_arg(argv[i]) < 0)
-			free_on_error(stack, NULL);
-		if (word_count(argv[i]) != 1)
-		{
-			j = 0;
-			array = ft_split(argv[i++]);
-			while (array[j])
-			{
-				if (!ft_atoi(array[j++], &res))
-					free_on_error(NULL, array);
-				ft_lstadd_back(stack, ft_lstnew(res));
-			}
-			free_array(array);
-		}
-		else if (!ft_atoi(argv[i++], &res))
-			free_on_error(stack, NULL);
-		else
-			ft_lstadd_back(stack, ft_lstnew(res));
+		printf("%d\n", tmp->data);
+		tmp = tmp->next;
 	}
-	check_stack(*stack);
+}
+
+void	clear_stack(t_list **stack)
+{
+	t_list	*tmp;
+
+	if (!stack)
+		return ;
+	while (*stack)
+	{
+		tmp = (*stack)->next;
+		free(*stack);
+		(*stack) = tmp;
+	}
 }

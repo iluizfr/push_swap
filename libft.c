@@ -25,10 +25,10 @@ int	is_space(char c)
 int	ft_atoi(char *nptr, int *result)
 {
 	int		sin;
-	long	resul;
+	long	res;
 
 	sin = 1;
-	resul = 0;
+	res = 0;
 	while (is_space(*nptr))
 		nptr++;
 	if (*nptr == '+' || *nptr == '-')
@@ -39,13 +39,13 @@ int	ft_atoi(char *nptr, int *result)
 	}
 	while (*nptr && is_digit(*nptr))
 	{
-		resul *= 10;
-		resul += *nptr - '0';
+		res *= 10;
+		res += *nptr - '0';
 		nptr++;
-		if ((resul * sin) > MAX_INT || (resul * sin) < MIN_INT)
+		if ((res * sin) > MAX_INT || (res * sin) < MIN_INT)
 			return (0);
 	}
-	return (*result = resul * sin, 1);
+	return (*result = res * sin, 1);
 }
 
 char	*ft_substr(const char *str, int start, int len)

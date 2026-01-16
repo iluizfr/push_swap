@@ -26,16 +26,13 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-// list functions
+// ==== * list functions * ==== //
 void	creat_stack(t_list **stack, int argc, char **argv);
 void	ft_lstadd_back(t_list **lst, t_list *new);
-t_list	*ft_lstlast(t_list *lst);
-int		ft_lstsize(t_list *lst);
 t_list	*ft_lstnew(int num);
 
-// Libft functions
+// ==== * Libft functions * ==== //
 char	*ft_substr(const char *str, int start, int len);
-int		ft_strcmp(char *s1, char *s2);
 void	free_array(char **array);
 char	**ft_split(char *str);
 int		word_count(char *str);
@@ -43,16 +40,11 @@ int		ft_atoi(char *nptr, int *result);
 int		is_digit(char c);
 int		is_space(char c);
 
-// Personal functions
-void	free_on_error(t_list **stack, char **split);
-int		add_arg(t_list *stack, char *argv);
-int		check_args(int argc, char **args);
+// ==== * Utils * ==== //
 void	clear_stack(t_list **stack);
-void	check_stack(t_list *stack);
 void	print_stack(t_list *stack);
-int		verify_arg(char *arg);
 
-// Sorting
+// ==== * Sorting * ==== //
 void	sa(t_list **stack);
 void	sb(t_list **stack);
 void	pa(t_list **stack_a, t_list **stack_b);

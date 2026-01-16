@@ -21,10 +21,10 @@ int	main(int argc, char **argv)
 	{
 		creat_stack(&stack_a, argc, argv);
 		print_stack(stack_a);
-		printf("------------\n");
-		sa(&stack_a);
-		print_stack(stack_a);
-		clear_stack(&stack_a);
+		printf("--------\n");
+		//sa(&stack_a);
+		//print_stack(stack_a);
+		//clear_stack(&stack_a);
 	}
 	return (0);
 }
