@@ -6,7 +6,7 @@
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:14:06 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/15 19:13:31 by lde-frei         ###   ########.fr       */
+/*   Updated: 2026/01/20 17:15:57 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,21 @@ t_list	*ft_lstnew(int num)
 	new->data = num;
 	new->next = NULL;
 	return (new);
+}
+
+int	ft_lstsize(t_list *lst)
+{
+	t_list	*tmp;
+	int		size;
+
+	size = 0;
+	tmp = lst;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		size++;
+	}
+	return (size);
 }
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
@@ -61,7 +76,7 @@ void	clear_stack(t_list **stack)
 {
 	t_list	*tmp;
 
-	if (!stack)
+	if (!*stack)
 		return ;
 	while (*stack)
 	{

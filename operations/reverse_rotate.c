@@ -1,53 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/15 14:54:52 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/20 15:59:34 by lde-frei         ###   ########.fr       */
+/*   Created: 2026/01/20 15:31:18 by lde-frei          #+#    #+#             */
+/*   Updated: 2026/01/20 17:14:53 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static void	swap(t_list **stack)
+static void	reverse_rotate(t_list **stack)
 {
 	t_list	*first;
-	t_list	*second;
+	t_list	*penult;
+	t_list	*last;
 
 	first = *stack;
-	second = first->next;
-	first->next = second->next;
-	second->next = first;
-	*stack = second;
+	penult = *stack;
+	while (penult->next->next != NULL)
+		penult = penult->next;
+	last = penult->next;
+	last->next = first;
+	penult->next = NULL;
+	*stack = last;
 }
 
-void	sa(t_list **stack_a)
+void	rra(t_list **stack_a)
 {
 	if (ft_lstsize(*stack_a) > 1)
 	{
-		swap(stack_a);
-		write(1, "sa\n", 3);
+		reverse_rotate(stack_a);
+		write(1, "rra\n", 4);
 	}
 }
 
-void	sb(t_list **stack_b)
+void	rrb(t_list **stack_b)
 {
 	if (ft_lstsize(*stack_b) > 1)
 	{
-		swap(stack_b);
-		write(1, "sb\n", 3);
+		reverse_rotate(stack_b);
+		write(1, "rrb\n", 4);
 	}
 }
 
-void	ss(t_list **stack_a, t_list **stack_b)
+void	rrr(t_list **stack_a, t_list **stack_b)
 {
 	if (ft_lstsize(*stack_a) > 1 && ft_lstsize(*stack_b) > 1)
 	{
-		swap(stack_a);
-		swap(stack_b);
-		write(1, "ss\n", 3);
+		reverse_rotate(stack_a);
+		reverse_rotate(stack_b);
+		write(1, "rrr\n", 4);
 	}
 }

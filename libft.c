@@ -6,7 +6,7 @@
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 16:21:22 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/15 18:21:49 by lde-frei         ###   ########.fr       */
+/*   Updated: 2026/01/18 18:16:36 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,10 @@ char	*ft_substr(const char *str, int start, int len)
 		*sub++ = *str++;
 	*sub = '\0';
 	return (ptr);
+}
+
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	new->next = *lst;
+	*lst = new;
 }

@@ -3,7 +3,7 @@ FLAG = -Wall -Wextra -Werror
 CC   = cc
 
 SRCS = push_swap.c push_swap_utils.c list_function.c ft_split.c libft.c \
-       operations/swap.c parser.c
+       operations/swap.c parser.c operations/rotate.c operations/reverse_rotate.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

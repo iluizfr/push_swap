@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/18 17:50:53 by lde-frei          #+#    #+#             */
+/*   Updated: 2026/01/20 17:13:56 by lde-frei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int	verify_arg(char *arg)
@@ -75,7 +87,7 @@ void	creat_stack(t_list **stack, int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		if (verify_arg(argv[i]) < 0) 
+		if (verify_arg(argv[i]) < 0)
 			free_on_error(stack, NULL);
 		else if (word_count(argv[i]) != 1)
 			divide_args(stack, i, argv);
