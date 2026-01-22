@@ -6,7 +6,7 @@
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:27:23 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/20 15:50:59 by lde-frei         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:20:45 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ void	pb(t_list **stack_b, t_list **stack_a)
 	if (ft_lstsize(*stack_a) > 0)
 	{
 		push(stack_b, stack_a);
+		write(1, "pb\n", 3);
 	}
 }

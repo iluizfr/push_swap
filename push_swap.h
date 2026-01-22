@@ -6,7 +6,7 @@
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 15:37:50 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/20 15:57:37 by lde-frei         ###   ########.fr       */
+/*   Updated: 2026/01/22 12:53:40 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		is_digit(char c);
 int		is_space(char c);
 
 // ==== * Utils * ==== //
+void	sort_stack(t_list **stack_a, t_list **stack_b);
 void	clear_stack(t_list **stack);
 void	print_stack(t_list *stack);
 
