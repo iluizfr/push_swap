@@ -6,7 +6,7 @@
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:32:52 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/22 18:28:55 by lde-frei         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:14:20 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-int		is_sorted(t_list *stack)
+int		is_ascendig(t_list *stack)
 {
 	t_list *tmp;
 
@@ -35,7 +35,7 @@ int		is_sorted(t_list *stack)
 	return (1);
 }
 
-int		is_sorted2(t_list *stack)
+int		is_descendig(t_list *stack)
 {
 	t_list *tmp;
 
@@ -52,9 +52,9 @@ int		is_sorted2(t_list *stack)
 void	first_step(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*bigger;
-	
+
 	bigger = ft_lstlast(*stack_a);
-	while (!is_sorted(*stack_a))
+	while (!is_ascendig(*stack_a))
 	{
 		if ((*stack_a)->data > bigger->data)
 		{
@@ -72,7 +72,7 @@ void	second_step(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*smaller;
 	smaller = ft_lstlast(*stack_b);
-	while (!is_sorted2(*stack_b))
+	while (!is_descendig(*stack_b) && ft_lstsize(*stack_b) > 0)
 	{
 		if ((*stack_b)->data < smaller->data)
 		{
@@ -88,11 +88,20 @@ void	second_step(t_list **stack_a, t_list **stack_b)
 	}
 }
 
+void	third_step(t_list **stack_a, t_list **stack_b)
+{
+	while (ft_lstsize(*stack_b) > 0)
+	{
+		pa(stack_a, stack_b);
+	}	
+}
+
 void	sort_stack(t_list **stack_a, t_list **stack_b)
 {
-	while (!is_sorted(*stack_a))
+	while (!is_ascendig(*stack_a))
 	{
 		first_step(stack_a, stack_b);
 		second_step(stack_a, stack_b);
+		third_step(stack_a, stack_b);
 	}
 }
