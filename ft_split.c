@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	word_len(char *str)
+static int	word_len(char *str)
 {
 	int	i;
 
@@ -67,7 +67,7 @@ char	**ft_split(char *str)
 	j = 0;
 	while (str[i])
 	{
-		while (is_space(str[i]))
+		while (str[i] && is_space(str[i]))
 			i++;
 		if (str[i] && !is_space(str[i]))
 		{

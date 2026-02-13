@@ -19,22 +19,30 @@
 
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
+# define ABS(x) (x > 0 ? (x) : (x * -1))
 
-typedef struct s_list
+typedef struct s_node
 {
+	int				pos;
 	int				data;
-	struct s_list	*next;
-}					t_list;
+	int				keep;
+	int				index;
+	int				cost_a;
+	int				cost_b;
+	int				target_pos;
+	struct s_node	*next;
+}					t_node;
 
 // ==== * list functions * ==== //
-void	creat_stack(t_list **stack, int argc, char **argv);
-void	ft_lstadd_front(t_list **lst, t_list *new);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-int		ft_lstsize(t_list *lst);
-t_list	*ft_lstnew(int num);
+void	creat_stack(t_node **stack, int argc, char **argv);
+void	ft_lstadd_back(t_node **lst, t_node *new);
+t_node	*ft_lstlast(t_node *lst);
+int		ft_lstsize(t_node *lst);
+t_node	*ft_lstnew(int num);
 
 // ==== * Libft functions * ==== //
 char	*ft_substr(const char *str, int start, int len);
+void	sort_int_tab(int *tab, int len);
 void	free_array(char **array);
 char	**ft_split(char *str);
 int		word_count(char *str);
@@ -43,21 +51,28 @@ int		is_digit(char c);
 int		is_space(char c);
 
 // ==== * Utils * ==== //
-void	sort_stack(t_list **stack_a, t_list **stack_b);
-void	clear_stack(t_list **stack);
-void	print_stack(t_list *stack);
+void	sort_stack(t_node **stack_a, t_node **stack_b);
+void	sort_5(t_node **stack_a, t_node **stack_b);
+void	clear_stack(t_node **stack);
+void	print_stack(t_node *stack);
+void	update_pos(t_node *stack);
+int		is_ascending(t_node *stack);
+void	set_lis(t_node *stack_a);
+void	sort_2(t_node **stack);
+void	sort_3(t_node **stack);
+void	idex(t_node *head);
 
-// ==== * Sorting * ==== //
-void	rrr(t_list **stack_a, t_list **stack_b);
-void	pa(t_list **stack_a, t_list **stack_b);
-void	pb(t_list **stack_a, t_list **stack_b);
-void	ss(t_list **stack_a, t_list **stack_b);
-void	rr(t_list **stack_a, t_list **stack_b);
-void	rra(t_list **stack_a);
-void	rrb(t_list **stack_b);
-void	ra(t_list **stack_a);
-void	rb(t_list **stack_b);
-void	sa(t_list **stack_a);
-void	sb(t_list **stack_b);
+// ==== * Operations * ==== //
+void	rrr(t_node **stack_a, t_node **stack_b);
+void	pa(t_node **stack_a, t_node **stack_b);
+void	pb(t_node **stack_a, t_node **stack_b);
+void	ss(t_node **stack_a, t_node **stack_b);
+void	rr(t_node **stack_a, t_node **stack_b);
+void	rra(t_node **stack_a);
+void	rrb(t_node **stack_b);
+void	ra(t_node **stack_a);
+void	rb(t_node **stack_b);
+void	sa(t_node **stack_a);
+void	sb(t_node **stack_b);
 
 #endif

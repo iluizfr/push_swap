@@ -12,11 +12,11 @@
 
 #include "../push_swap.h"
 
-static void	reverse_rotate(t_list **stack)
+static void	reverse_rotate(t_node **stack)
 {
-	t_list	*first;
-	t_list	*penult;
-	t_list	*last;
+	t_node	*first;
+	t_node	*penult;
+	t_node	*last;
 
 	first = *stack;
 	penult = *stack;
@@ -28,7 +28,7 @@ static void	reverse_rotate(t_list **stack)
 	*stack = last;
 }
 
-void	rra(t_list **stack_a)
+void	rra(t_node **stack_a)
 {
 	if (ft_lstsize(*stack_a) > 1)
 	{
@@ -37,7 +37,7 @@ void	rra(t_list **stack_a)
 	}
 }
 
-void	rrb(t_list **stack_b)
+void	rrb(t_node **stack_b)
 {
 	if (ft_lstsize(*stack_b) > 1)
 	{
@@ -46,7 +46,7 @@ void	rrb(t_list **stack_b)
 	}
 }
 
-void	rrr(t_list **stack_a, t_list **stack_b)
+void	rrr(t_node **stack_a, t_node **stack_b)
 {
 	if (ft_lstsize(*stack_a) > 1 && ft_lstsize(*stack_b) > 1)
 	{

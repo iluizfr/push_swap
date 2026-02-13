@@ -12,10 +12,10 @@
 
 #include "../push_swap.h"
 
-static void	swap(t_list **stack)
+static void	swap(t_node **stack)
 {
-	t_list	*first;
-	t_list	*second;
+	t_node	*first;
+	t_node	*second;
 
 	first = *stack;
 	second = first->next;
@@ -24,7 +24,7 @@ static void	swap(t_list **stack)
 	*stack = second;
 }
 
-void	sa(t_list **stack_a)
+void	sa(t_node **stack_a)
 {
 	if (ft_lstsize(*stack_a) > 1)
 	{
@@ -33,7 +33,7 @@ void	sa(t_list **stack_a)
 	}
 }
 
-void	sb(t_list **stack_b)
+void	sb(t_node **stack_b)
 {
 	if (ft_lstsize(*stack_b) > 1)
 	{
@@ -42,7 +42,7 @@ void	sb(t_list **stack_b)
 	}
 }
 
-void	ss(t_list **stack_a, t_list **stack_b)
+void	ss(t_node **stack_a, t_node **stack_b)
 {
 	if (ft_lstsize(*stack_a) > 1 && ft_lstsize(*stack_b) > 1)
 	{

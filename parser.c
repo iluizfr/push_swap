@@ -32,7 +32,7 @@ static int	verify_arg(char *arg)
 	return (0);
 }
 
-static void	free_on_error(t_list **stack, char **split)
+static void	free_on_error(t_node **stack, char **split)
 {
 	if (stack)
 		clear_stack(stack);
@@ -42,7 +42,7 @@ static void	free_on_error(t_list **stack, char **split)
 	exit(EXIT_SUCCESS);
 }
 
-static void	divide_args(t_list **stack, int i, char **argv)
+static void	divide_args(t_node **stack, int i, char **argv)
 {
 	int		j;
 	int		res;
@@ -60,11 +60,13 @@ static void	divide_args(t_list **stack, int i, char **argv)
 	free_array(array);
 }
 
-static void	check_stack(t_list *stack)
+static void	check_stack(t_node *stack)
 {
-	t_list	*tmp;
-	t_list	*next;
+	t_node	*tmp;
+	t_node	*next;
 
+	if (!stack)
+		return ;
 	tmp = stack;
 	while (tmp->next)
 	{
@@ -79,7 +81,7 @@ static void	check_stack(t_list *stack)
 	}
 }
 
-void	creat_stack(t_list **stack, int argc, char **argv)
+void	creat_stack(t_node **stack, int argc, char **argv)
 {
 	int		i;
 	int		res;

@@ -14,8 +14,8 @@
 
 int	main(int argc, char **argv)
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
+	t_node	*stack_a;
+	t_node	*stack_b;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	{
 		creat_stack(&stack_a, argc, argv);
 		sort_stack(&stack_a, &stack_b);
-		print_stack(stack_a);
+		//print_stack(stack_a);
 		clear_stack(&stack_a);
 	}
 	return (0);

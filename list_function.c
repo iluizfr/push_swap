@@ -12,11 +12,11 @@
 
 #include "push_swap.h"
 
-t_list	*ft_lstnew(int num)
+t_node	*ft_lstnew(int num)
 {
-	t_list	*new;
+	t_node	*new;
 
-	new = (t_list *)malloc(sizeof(t_list));
+	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 		return (NULL);
 	new->data = num;
@@ -24,9 +24,9 @@ t_list	*ft_lstnew(int num)
 	return (new);
 }
 
-int	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_node *lst)
 {
-	t_list	*tmp;
+	t_node	*tmp;
 	int		size;
 
 	size = 0;
@@ -39,10 +39,10 @@ int	ft_lstsize(t_list *lst)
 	return (size);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_node **lst, t_node *new)
 {
-	t_list	*ptr;
-	t_list	*tmp;
+	t_node	*ptr;
+	t_node	*tmp;
 
 	if (!new)
 		return ;
@@ -58,30 +58,11 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	ptr->next = new;
 }
 
-void	print_stack(t_list *stack)
+t_node	*ft_lstlast(t_node *lst)
 {
-	t_list	*tmp;
-
-	if (!stack)
-		return ;
-	tmp = stack;
-	while (tmp)
-	{
-		printf("%d\n", tmp->data);
-		tmp = tmp->next;
-	}
-}
-
-void	clear_stack(t_list **stack)
-{
-	t_list	*tmp;
-
-	if (!*stack)
-		return ;
-	while (*stack)
-	{
-		tmp = (*stack)->next;
-		free(*stack);
-		(*stack) = tmp;
-	}
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

@@ -74,8 +74,26 @@ char	*ft_substr(const char *str, int start, int len)
 	return (ptr);
 }
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	sort_int_tab(int *tab, int len)
 {
-	new->next = *lst;
-	*lst = new;
+	int i;
+	int j;
+	int tmp;
+
+	i = 0;
+	while (i < len - 1)
+	{
+		j = i;
+		while (j < len)
+		{
+			if (tab[i] > tab[j])
+			{
+				tmp = tab[i];
+				tab[i] = tab[j];
+				tab[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}	
 }

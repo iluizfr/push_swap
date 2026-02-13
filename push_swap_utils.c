@@ -12,18 +12,9 @@
 
 #include "push_swap.h"
 
-t_list	*ft_lstlast(t_list *lst)
+int		is_ascending(t_node *stack)
 {
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-int		is_ascendig(t_list *stack)
-{
-	t_list *tmp;
+	t_node *tmp;
 
 	tmp = stack;
 	while (tmp != NULL && tmp->next != NULL)
@@ -35,73 +26,78 @@ int		is_ascendig(t_list *stack)
 	return (1);
 }
 
-int		is_descendig(t_list *stack)
+void	print_stack(t_node *stack)
 {
-	t_list *tmp;
+	t_node	*tmp;
 
+	if (!stack)
+		return ;
 	tmp = stack;
-	while (tmp != NULL && tmp->next != NULL)
+	while (tmp)
 	{
-		if (tmp->data < tmp->next->data)
-			return (0);
+		printf("%d\n", tmp->data);
 		tmp = tmp->next;
 	}
-	return (1);
 }
 
-void	first_step(t_list **stack_a, t_list **stack_b)
+void	clear_stack(t_node **stack)
 {
-	t_list	*bigger;
+	t_node	*tmp;
 
-	bigger = ft_lstlast(*stack_a);
-	while (!is_ascendig(*stack_a))
+	if (!*stack)
+		return ;
+	while (*stack)
 	{
-		if ((*stack_a)->data > bigger->data)
-		{
-			ra(stack_a);
-			bigger = ft_lstlast(*stack_a);
-		}
-		else if ((*stack_a)->data < bigger->data && (*stack_a)->data > (*stack_a)->next->data)
-			sa(stack_a);
-		else if ((*stack_a)->data < bigger->data && (*stack_a)->data < (*stack_a)->next->data)
-			pb(stack_b, stack_a);
+		tmp = (*stack)->next;
+		free(*stack);
+		(*stack) = tmp;
 	}
 }
 
-void	second_step(t_list **stack_a, t_list **stack_b)
+void	idex(t_node *head)
 {
-	t_list	*smaller;
-	smaller = ft_lstlast(*stack_b);
-	while (!is_descendig(*stack_b) && ft_lstsize(*stack_b) > 0)
+	int		i;
+	int		j;
+	int		len;
+	int		*vetor;
+	t_node	*tmp;
+
+	len = ft_lstsize(head);
+	vetor = malloc(sizeof(int) * len);
+	tmp = head;
+	i = 0;
+	while (tmp)
 	{
-		if ((*stack_b)->data < smaller->data)
-		{
-			rb(stack_b);
-			smaller = ft_lstlast(*stack_b);
-		}
-		else if ((*stack_b)->data > smaller->data && (*stack_b)->data < (*stack_b)->next->data)
-			sb(stack_b);
-		else if ((*stack_b)->data > smaller->data && (*stack_b)->data > (*stack_b)->next->data)
-			pa(stack_a, stack_b);
-		else if ((*stack_a)->data < smaller->data && (*stack_a)->data > (*stack_a)->next->data)
-			sa(stack_a);
+		vetor[i++] = tmp->data;
+		tmp = tmp->next;
 	}
+	sort_int_tab(vetor, len);
+	tmp = head;
+	while (tmp)
+	{
+		j = 0;
+		while (j < len)
+		{
+			if (tmp->data == vetor[j])
+			{
+				tmp->index = j;
+				break;
+			}
+			j++;
+		}
+		tmp = tmp->next;
+	}
+	free(vetor);
 }
 
-void	third_step(t_list **stack_a, t_list **stack_b)
+void	update_pos(t_node *stack)
 {
-	while (ft_lstsize(*stack_b) > 0)
-	{
-		pa(stack_a, stack_b);
-	}	
-}
+	int	i;
 
-void	sort_stack(t_list **stack_a, t_list **stack_b)
-{
-	while (!is_ascendig(*stack_a))
+	i = 0;
+	while (stack)
 	{
-		first_step(stack_a, stack_b);
-		second_step(stack_a, stack_b);
-		third_step(stack_a, stack_b);
+		stack->pos = i++;
+		stack = stack->next;
 	}
 }

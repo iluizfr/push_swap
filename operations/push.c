@@ -12,9 +12,9 @@
 
 #include "../push_swap.h"
 
-static void	push(t_list **stack_dst, t_list **stack_src)
+static void	push(t_node **stack_dst, t_node **stack_src)
 {
-	t_list	*first;
+	t_node	*first;
 
 	first = *stack_src;
 	*stack_src = first->next;
@@ -22,7 +22,7 @@ static void	push(t_list **stack_dst, t_list **stack_src)
 	*stack_dst = first;
 }
 
-void	pa(t_list **stack_a, t_list **stack_b)
+void	pa(t_node **stack_a, t_node **stack_b)
 {
 	if (ft_lstsize(*stack_b) > 0)
 	{
@@ -31,7 +31,7 @@ void	pa(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-void	pb(t_list **stack_b, t_list **stack_a)
+void	pb(t_node **stack_b, t_node **stack_a)
 {
 	if (ft_lstsize(*stack_a) > 0)
 	{
