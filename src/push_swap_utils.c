@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int		is_ascending(t_node *stack)
 {
@@ -28,15 +28,10 @@ int		is_ascending(t_node *stack)
 
 void	print_stack(t_node *stack)
 {
-	t_node	*tmp;
-
-	if (!stack)
-		return ;
-	tmp = stack;
-	while (tmp)
+	while (stack)
 	{
-		printf("%d\n", tmp->data);
-		tmp = tmp->next;
+		printf("%d\n", stack->data);
+		stack = stack->next;
 	}
 }
 

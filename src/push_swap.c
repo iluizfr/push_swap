@@ -10,59 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-t_node *find_min_node(t_node *stack)
-{
-	t_node	*tmp;
-	t_node	*min_node;
-
-	if (!stack)
-		return (NULL);
-	tmp = stack;
-	min_node = stack;
-	while (tmp)
-	{
-		if (tmp->index < min_node->index)
-			min_node = tmp;
-		tmp = tmp->next;
-	}
-	return (min_node);
-}
-
-t_node *find_target(t_node *stack_a, int b_index)
-{
-	t_node	*tmp;
-	t_node	*best;
-	int		diff;
-
-	best = NULL;
-	diff = MAX_INT;
-	tmp = stack_a;
-	while (tmp)
-	{
-		if (tmp->index > b_index && tmp->index - b_index < diff)
-		{
-			diff = tmp->index - b_index;
-			best = tmp;
-		}
-		tmp = tmp->next;
-	}
-	if (best)
-		return (best);
-	return (find_min_node(stack_a));
-}
-
-int has_to_rm(t_node *stack)
-{
-	while (stack)
-	{
-		if (stack->keep == 0)
-			return (1);
-		stack = stack->next;
-	}
-	return (0);
-}
+#include "../push_swap.h"
 
 void	set_targets(t_node *stack_a, t_node *stack_b)
 {
@@ -177,51 +125,5 @@ void	final_rotate(t_node **stack_a)
 		min_pos = size - min_pos;
 		while (min_pos--)
 			rra(stack_a);
-	}
-}
-
-int	sort(t_node **stack_a, t_node**stack_b)
-{
-	t_node	*cheap;
-
-	idex(*stack_a);
-	set_lis(*stack_a);
-	while (has_to_rm(*stack_a))
-	{
-		if ((*stack_a)->keep == 0)
-			pb(stack_b, stack_a);
-		else
-			ra(stack_a);	
-	}
-	while (ft_lstsize(*stack_b) > 0)
-	{
-		update_pos(*stack_a);
-		update_pos(*stack_b);
-		set_targets(*stack_a, *stack_b);
-		calc_costs(*stack_a, *stack_b);
-		cheap = get_cheapest(*stack_b);
-		exec_rotations(stack_a, stack_b, cheap);
-		pa(stack_a, stack_b);
-	}
-	update_pos(*stack_a);
-	final_rotate(stack_a);
-	return (0);
-}
-
-void	sort_stack(t_node **stack_a, t_node **stack_b)
-{
-	int	size;
-
-	size = ft_lstsize(*stack_a);
-	if (size == 2)
-		sort_2(stack_a);
-	else if (size == 3)
-		sort_3(stack_a);
-	else if (size > 3 && size < 6)
-		sort_5(stack_a, stack_b);
-	else
-	{
-		if (!is_ascending(*stack_a))
-			sort(stack_a, stack_b);
 	}
 }

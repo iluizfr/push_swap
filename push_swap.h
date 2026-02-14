@@ -42,22 +42,30 @@ t_node	*ft_lstnew(int num);
 
 // ==== * Libft functions * ==== //
 char	*ft_substr(const char *str, int start, int len);
+int		ft_atoi(char *nptr, int *result);
 void	sort_int_tab(int *tab, int len);
 void	free_array(char **array);
 char	**ft_split(char *str);
 int		word_count(char *str);
-int		ft_atoi(char *nptr, int *result);
 int		is_digit(char c);
 int		is_space(char c);
 
 // ==== * Utils * ==== //
+void	exec_rotations(t_node **stack_a, t_node **stack_b, t_node *node);
 void	sort_stack(t_node **stack_a, t_node **stack_b);
+void	set_targets(t_node *stack_a, t_node *stack_b);
+void	calc_costs(t_node *stack_a, t_node *stack_b);
 void	sort_5(t_node **stack_a, t_node **stack_b);
+t_node	*find_target(t_node *stack_a, int b_index);
+void	final_rotate(t_node **stack_a);
+t_node	*find_min_node(t_node *stack);
 void	clear_stack(t_node **stack);
+int		is_ascending(t_node *stack);
 void	print_stack(t_node *stack);
 void	update_pos(t_node *stack);
-int		is_ascending(t_node *stack);
 void	set_lis(t_node *stack_a);
+int		has_to_rm(t_node *stack);
+t_node	*get_cheapest(t_node *b);
 void	sort_2(t_node **stack);
 void	sort_3(t_node **stack);
 void	idex(t_node *head);
@@ -65,7 +73,7 @@ void	idex(t_node *head);
 // ==== * Operations * ==== //
 void	rrr(t_node **stack_a, t_node **stack_b);
 void	pa(t_node **stack_a, t_node **stack_b);
-void	pb(t_node **stack_a, t_node **stack_b);
+void	pb(t_node **stack_b, t_node **stack_a);
 void	ss(t_node **stack_a, t_node **stack_b);
 void	rr(t_node **stack_a, t_node **stack_b);
 void	rra(t_node **stack_a);

@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	compute_lis(int *array, int n, int *len, int *prev)
 {
