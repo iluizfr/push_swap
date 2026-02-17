@@ -1,53 +1,91 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/07 16:32:52 by lde-frei          #+#    #+#             */
+/*   Updated: 2026/01/23 18:14:20 by lde-frei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-t_node *find_min_node(t_node *stack)
+static void	mark_index(t_node *head, int *vetor, int len)
 {
-	t_node	*tmp;
-	t_node	*min_node;
+	int i;
 
-	if (!stack)
-		return (NULL);
-	tmp = stack;
-	min_node = stack;
-	while (tmp)
+	while (head)
 	{
-		if (tmp->index < min_node->index)
-			min_node = tmp;
-		tmp = tmp->next;
-	}
-	return (min_node);
-}
-
-t_node *find_target(t_node *stack_a, int b_index)
-{
-	t_node	*tmp;
-	t_node	*best;
-	int		diff;
-
-	best = NULL;
-	diff = MAX_INT;
-	tmp = stack_a;
-	while (tmp)
-	{
-		if (tmp->index > b_index && tmp->index - b_index < diff)
+		i = 0;
+		while (i < len)
 		{
-			diff = tmp->index - b_index;
-			best = tmp;
+			if (head->data == vetor[i])
+			{
+				head->index = i;
+				break;
+			}
+			i++;
 		}
-		tmp = tmp->next;
+		head = head->next;
 	}
-	if (best)
-		return (best);
-	return (find_min_node(stack_a));
 }
 
-int has_to_rm(t_node *stack)
+void	set_index(t_node *head)	
+{
+	int		i;
+	int		len;
+	int		*vetor;
+	t_node	*tmp;
+
+	len = ft_lstsize(head);
+	vetor = malloc(sizeof(int) * len);
+	tmp = head;
+	i = 0;
+	while (tmp)
+	{
+		vetor[i++] = tmp->data;
+		tmp = tmp->next;
+	}
+	sort_int_tab(vetor, len);
+	mark_index(head, vetor, len);
+	free(vetor);
+}
+
+int		is_ascending(t_node *stack)
+{
+	t_node *tmp;
+
+	tmp = stack;
+	while (tmp != NULL && tmp->next != NULL)
+	{
+		if (tmp->data > tmp->next->data)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
+void	print_stack(t_node *stack)
 {
 	while (stack)
 	{
-		if (stack->keep == 0)
-			return (1);
+		printf("%d\n", stack->data);
 		stack = stack->next;
 	}
-	return (0);
+}
+
+void	clear_stack(t_node **stack)
+{
+	t_node	*tmp;
+
+	if (!*stack)
+		return ;
+	while (*stack)
+	{
+		tmp = (*stack)->next;
+		free(*stack);
+		(*stack) = tmp;
+	}
 }

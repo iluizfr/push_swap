@@ -39,7 +39,7 @@ static void	free_on_error(t_node **stack, char **split)
 	if (split)
 		free_array(split);
 	write(1, "Error\n", 6);
-	exit(EXIT_SUCCESS);
+	exit(EXIT_FAILURE);
 }
 
 static void	divide_args(t_node **stack, int i, char **argv)

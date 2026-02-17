@@ -2,9 +2,9 @@ NAME = push_swap
 FLAG = -Wall -Wextra -Werror
 CC   = cc
 
-SRCS = main.c src/push_swap.c src/push_swap_utils.c src/list_function.c src/ft_split.c src/libft.c \
+SRCS = main.c src/sort_utils.c src/utils.c src/list_function.c src/ft_split.c src/libft.c \
        operations/swap.c src/parser.c operations/rotate.c operations/reverse_rotate.c \
-	   operations/push.c src/sort_utils.c src/set_lis.c src/utils.c
+	   operations/push.c src/sort.c src/set_lis.c src/sort_utils2.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

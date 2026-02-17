@@ -1,101 +1,118 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algorithm.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/22 16:13:51 by lde-frei          #+#    #+#             */
+/*   Updated: 2026/01/22 16:22:14 by lde-frei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-void	sort_2(t_node **stack)
+void	set_targets(t_node *stack_a, t_node *stack_b)
 {
-	if (!is_ascending(*stack))
-			sa(stack);
+	t_node	*tmp_b;
+	t_node	*target;
+
+	tmp_b = stack_b;
+	while (tmp_b)
+	{
+		target = find_target(stack_a, tmp_b->index);
+		tmp_b->target_pos = target->pos;
+		tmp_b = tmp_b->next;
+	}
 }
 
-void	sort_3(t_node **stack)
+void	calc_costs(t_node *stack_a, t_node *stack_b)
 {
-	t_node	*bigger;
+	int		size_a;
+	int		size_b;
+	t_node	*tmp;
 
-	bigger = ft_lstlast(*stack);
-	while (!is_ascending(*stack))
+	size_a = ft_lstsize(stack_a);
+	size_b = ft_lstsize(stack_b);
+	tmp = stack_b;
+	while (tmp)
 	{
-		if ((*stack)->data > bigger->data)
-		{
-			ra(stack);
-			bigger = ft_lstlast(*stack);
-		}
-		else if ((*stack)->data > (*stack)->next->data)
-			sa(stack);
+		if (tmp->pos <= size_b / 2)
+			tmp->cost_b = tmp->pos;
 		else
-		{
-			ra(stack);
-			bigger = ft_lstlast(*stack);
-		}
-
+			tmp->cost_b = tmp->pos - size_b;
+		if (tmp->target_pos <= size_a / 2)
+			tmp->cost_a = tmp->target_pos;
+		else
+			tmp->cost_a = tmp->target_pos - size_a;
+		tmp = tmp->next;
 	}
 }
 
-void	sort_5(t_node **stack_a, t_node **stack_b)
+t_node	*get_cheapest(t_node *b)
 {
-	t_node	*bigger;
-
-	bigger = ft_lstlast(*stack_a);
-	while (!is_ascending(*stack_a))
-	{
-		while (!is_ascending(*stack_a))
-		{
-			if ((*stack_a)->data > bigger->data)
-			{
-				ra(stack_a);
-				bigger = ft_lstlast(*stack_a);
-			}
-			else if ((*stack_a)->data < bigger->data && (*stack_a)->data > (*stack_a)->next->data)
-				sa(stack_a);
-			else if ((*stack_a)->data < bigger->data && (*stack_a)->data < (*stack_a)->next->data)
-				pb(stack_b, stack_a);
-			else if ((*stack_a)->data > (*stack_a)->next->data)
-				sa(stack_a);
-		}
-		while (ft_lstsize(*stack_b) > 0)
-			pa(stack_a, stack_b);
-	}
-}
-
-void	sort(t_node **stack_a, t_node**stack_b)
-{
+	int		min;
+	int		cost;
 	t_node	*cheap;
 
-	idex(*stack_a);
-	set_lis(*stack_a);
-	while (has_to_rm(*stack_a))
+	cheap = b;
+	min = ABS(b->cost_a) + ABS(b->cost_b);
+	while (b)
 	{
-		if ((*stack_a)->keep == 0)
-			pb(stack_b, stack_a);
-		else
-			ra(stack_a);	
+		cost = ABS(b->cost_a) + ABS(b->cost_b);
+		if (cost < min)
+		{
+			min = cost;
+			cheap = b;
+		}
+		b = b->next;
 	}
-	while (ft_lstsize(*stack_b) > 0)
-	{
-		update_pos(*stack_a);
-		update_pos(*stack_b);
-		set_targets(*stack_a, *stack_b);
-		calc_costs(*stack_a, *stack_b);
-		cheap = get_cheapest(*stack_b);
-		exec_rotations(stack_a, stack_b, cheap);
-		pa(stack_a, stack_b);
-	}
-	update_pos(*stack_a);
-	final_rotate(stack_a);
+	return (cheap);
 }
 
-void	sort_stack(t_node **stack_a, t_node **stack_b)
+void	exec_rotations(t_node **stack_a, t_node **stack_b, t_node *node)
 {
-	int	size;
+	exec_double_rotate(stack_a, stack_b, node);
+	while (node->cost_a > 0)
+	{
+		ra(stack_a);
+		node->cost_a--;
+	}
+	while (node->cost_a < 0)
+	{
+		rra(stack_a);
+		node->cost_a++;
+	}
+	while (node->cost_b > 0)
+	{
+		rb(stack_b);
+		node->cost_b--;
+	}
+	while (node->cost_b < 0)
+	{
+		rrb(stack_b);
+		node->cost_b++;
+	}
+}
 
+void	final_rotate(t_node **stack_a)
+{
+	int		size;
+	int		min_pos;
+	t_node	*min_node;
+
+	min_node = find_min_node(*stack_a);
+	min_pos = min_node->pos;
 	size = ft_lstsize(*stack_a);
-	if (size == 2)
-		sort_2(stack_a);
-	else if (size == 3)
-		sort_3(stack_a);
-	else if (size > 3 && size < 6)
-		sort_5(stack_a, stack_b);
+	if (min_pos <= size / 2)
+	{
+		while (min_pos--)
+			ra(stack_a);
+	}
 	else
 	{
-		if (!is_ascending(*stack_a))
-			sort(stack_a, stack_b);
+		min_pos = size - min_pos;
+		while (min_pos--)
+			rra(stack_a);
 	}
 }

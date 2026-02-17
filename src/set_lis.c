@@ -1,6 +1,14 @@
 #include "../push_swap.h"
 
-void	compute_lis(int *array, int n, int *len, int *prev)
+/**
+ * @brief Computes the (LIS) at each index.
+ * 
+ * @param array The array who have all indexes of to be computed.
+ * @param n Numbers of elements in the array.
+ * @param len Array storing the Lis length at each index.
+ * @param prev Array storing the previous index for (LIS) reconstruction.
+*/
+static void	compute_lis(int *array, int n, int *len, int *prev)
 {
 	int	i;
 	int	j;
@@ -29,7 +37,7 @@ void	compute_lis(int *array, int n, int *len, int *prev)
 	}
 }
 
-int	find_lis_end(int *len, int n)
+static int	find_lis_end(int *len, int n)
 {
 	int	i;
 	int	max;
@@ -47,10 +55,11 @@ int	find_lis_end(int *len, int n)
 		}
 		i++;
 	}
+	free(len);
 	return (index);
 }
 
-void	clear_list_flag(t_node *stack_a)
+static void	clear_list_flag(t_node *stack_a)
 {
 	while (stack_a)
 	{
@@ -59,7 +68,7 @@ void	clear_list_flag(t_node *stack_a)
 	}
 }
 
-void	mark_lis(t_node *stack_a, int *prev, int lis_end)
+static void	mark_lis(t_node *stack_a, int *prev, int lis_end)
 {
 	int		i;
 	t_node	*tmp;
@@ -76,8 +85,18 @@ void	mark_lis(t_node *stack_a, int *prev, int lis_end)
 		tmp->keep = 1;
 		lis_end = prev[lis_end];
 	}
+	free(prev);
 }
 
+/**
+ * @brief Longest increasing subsequence (LIS), indentifies and maks the nodes
+ * 		  if they are in the lis. 
+ * 
+ * @param stack_a Pointer to the head of the linked list.
+ * @note  This function converts the linked list into an integer array
+ * 		  using each node's index value, finds where the (LIS) ends
+ * 		  and mark them with stack_a->keep = 1;
+*/
 void	set_lis(t_node *stack_a)
 {
 	int		i;
@@ -96,15 +115,12 @@ void	set_lis(t_node *stack_a)
 	prev = malloc(sizeof(int) * n);
 	while (tmp)
 	{
-		array[i] = tmp->index;
+		array[i++] = tmp->index;
 		tmp = tmp->next;
-		i++;
 	}
 	compute_lis(array, n, len, prev);
 	lis_end = find_lis_end(len, n);
 	clear_list_flag(stack_a);
 	mark_lis(stack_a, prev, lis_end);
 	free(array);
-	free(len);
-	free(prev);
 }

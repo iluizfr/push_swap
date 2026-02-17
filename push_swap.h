@@ -50,12 +50,12 @@ int		word_count(char *str);
 int		is_digit(char c);
 int		is_space(char c);
 
-// ==== * Utils * ==== //
+// ==== * Agorithm * ==== //
+void	exec_double_rotate(t_node **stack_a, t_node **stack_b, t_node *node);
 void	exec_rotations(t_node **stack_a, t_node **stack_b, t_node *node);
 void	sort_stack(t_node **stack_a, t_node **stack_b);
 void	set_targets(t_node *stack_a, t_node *stack_b);
 void	calc_costs(t_node *stack_a, t_node *stack_b);
-void	sort_5(t_node **stack_a, t_node **stack_b);
 t_node	*find_target(t_node *stack_a, int b_index);
 void	final_rotate(t_node **stack_a);
 t_node	*find_min_node(t_node *stack);
@@ -66,9 +66,7 @@ void	update_pos(t_node *stack);
 void	set_lis(t_node *stack_a);
 int		has_to_rm(t_node *stack);
 t_node	*get_cheapest(t_node *b);
-void	sort_2(t_node **stack);
-void	sort_3(t_node **stack);
-void	idex(t_node *head);
+void	set_index(t_node *head);
 
 // ==== * Operations * ==== //
 void	rrr(t_node **stack_a, t_node **stack_b);
