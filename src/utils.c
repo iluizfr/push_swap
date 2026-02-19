@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 16:32:52 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/23 18:14:20 by lde-frei         ###   ########.fr       */
+/*   Created: 2026/02/17 14:30:10 by lde-frei          #+#    #+#             */
+/*   Updated: 2026/02/18 14:52:15 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	mark_index(t_node *head, int *vetor, int len)
 {
-	int i;
+	int	i;
 
 	while (head)
 	{
@@ -24,7 +24,7 @@ static void	mark_index(t_node *head, int *vetor, int len)
 			if (head->data == vetor[i])
 			{
 				head->index = i;
-				break;
+				break ;
 			}
 			i++;
 		}
@@ -32,7 +32,7 @@ static void	mark_index(t_node *head, int *vetor, int len)
 	}
 }
 
-void	set_index(t_node *head)	
+void	set_index(t_node *head)
 {
 	int		i;
 	int		len;
@@ -53,9 +53,9 @@ void	set_index(t_node *head)
 	free(vetor);
 }
 
-int		is_ascending(t_node *stack)
+int	is_ascending(t_node *stack)
 {
-	t_node *tmp;
+	t_node	*tmp;
 
 	tmp = stack;
 	while (tmp != NULL && tmp->next != NULL)

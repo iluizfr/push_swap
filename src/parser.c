@@ -6,7 +6,7 @@
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 17:50:53 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/20 17:13:56 by lde-frei         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:23:08 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	free_on_error(t_node **stack, char **split)
 		clear_stack(stack);
 	if (split)
 		free_array(split);
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 

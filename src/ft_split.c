@@ -6,7 +6,7 @@
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 16:14:44 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/15 18:25:12 by lde-frei         ###   ########.fr       */
+/*   Updated: 2026/02/18 15:55:37 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,11 @@ char	**ft_split(char *str)
 	}
 	array[j] = NULL;
 	return (array);
+}
+
+int	absolut(int x)
+{
+	if (x < 0)
+		x = -x;
+	return (x);
 }

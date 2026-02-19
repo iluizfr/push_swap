@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/17 14:30:01 by lde-frei          #+#    #+#             */
+/*   Updated: 2026/02/18 14:56:12 by lde-frei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
 static void	sort_2(t_node **stack)
 {
 	if (!is_ascending(*stack))
-			sa(stack);
+		sa(stack);
 }
 
 static void	sort_3(t_node **stack)
@@ -25,7 +37,6 @@ static void	sort_3(t_node **stack)
 			ra(stack);
 			bigger = ft_lstlast(*stack);
 		}
-
 	}
 }
 
@@ -43,9 +54,11 @@ static void	sort_5(t_node **stack_a, t_node **stack_b)
 				ra(stack_a);
 				bigger = ft_lstlast(*stack_a);
 			}
-			else if ((*stack_a)->data < bigger->data && (*stack_a)->data > (*stack_a)->next->data)
+			else if ((*stack_a)->data < bigger->data && (*stack_a)->data
+				> (*stack_a)->next->data)
 				sa(stack_a);
-			else if ((*stack_a)->data < bigger->data && (*stack_a)->data < (*stack_a)->next->data)
+			else if ((*stack_a)->data < bigger->data && (*stack_a)->data
+				< (*stack_a)->next->data)
 				pb(stack_b, stack_a);
 			else if ((*stack_a)->data > (*stack_a)->next->data)
 				sa(stack_a);
@@ -66,7 +79,7 @@ static void	sort(t_node **stack_a, t_node**stack_b)
 		if ((*stack_a)->keep == 0)
 			pb(stack_b, stack_a);
 		else
-			ra(stack_a);	
+			ra(stack_a);
 	}
 	while (ft_lstsize(*stack_b) > 0)
 	{

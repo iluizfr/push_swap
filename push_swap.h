@@ -6,7 +6,7 @@
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 15:37:50 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/22 12:53:40 by lde-frei         ###   ########.fr       */
+/*   Updated: 2026/02/18 15:47:52 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
-# define ABS(x) (x > 0 ? (x) : (x * -1))
 
 typedef struct s_node
 {
@@ -49,6 +48,7 @@ char	**ft_split(char *str);
 int		word_count(char *str);
 int		is_digit(char c);
 int		is_space(char c);
+int		absolut(int x);
 
 // ==== * Agorithm * ==== //
 void	exec_double_rotate(t_node **stack_a, t_node **stack_b, t_node *node);

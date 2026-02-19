@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_utils2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/17 14:29:53 by lde-frei          #+#    #+#             */
+/*   Updated: 2026/02/18 14:53:01 by lde-frei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-t_node *find_min_node(t_node *stack)
+t_node	*find_min_node(t_node *stack)
 {
 	t_node	*tmp;
 	t_node	*min_node;
@@ -22,7 +34,7 @@ t_node *find_min_node(t_node *stack)
  * @brief Looks in stack_a the smaller index bigger than b_index.
  * 
 */
-t_node *find_target(t_node *stack_a, int b_index)
+t_node	*find_target(t_node *stack_a, int b_index)
 {
 	t_node	*tmp;
 	t_node	*best;
@@ -45,7 +57,7 @@ t_node *find_target(t_node *stack_a, int b_index)
 	return (find_min_node(stack_a));
 }
 
-int has_to_rm(t_node *stack)
+int	has_to_rm(t_node *stack)
 {
 	while (stack)
 	{

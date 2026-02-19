@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_lis.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/17 14:28:33 by lde-frei          #+#    #+#             */
+/*   Updated: 2026/02/18 15:18:48 by lde-frei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
 /**
@@ -100,27 +112,23 @@ static void	mark_lis(t_node *stack_a, int *prev, int lis_end)
 void	set_lis(t_node *stack_a)
 {
 	int		i;
-	int		n;
 	int		*len;
 	int		*prev;
 	int		*array;
-	int		lis_end;
 	t_node	*tmp;
 
 	i = 0;
 	tmp = stack_a;
-	n = ft_lstsize(stack_a);
-	array = malloc(sizeof(int) * n);
-	len = malloc(sizeof(int) * n);
-	prev = malloc(sizeof(int) * n);
+	array = malloc(sizeof(int) * ft_lstsize(stack_a));
+	len = malloc(sizeof(int) * ft_lstsize(stack_a));
+	prev = malloc(sizeof(int) * ft_lstsize(stack_a));
 	while (tmp)
 	{
 		array[i++] = tmp->index;
 		tmp = tmp->next;
 	}
-	compute_lis(array, n, len, prev);
-	lis_end = find_lis_end(len, n);
+	compute_lis(array, ft_lstsize(stack_a), len, prev);
 	clear_list_flag(stack_a);
-	mark_lis(stack_a, prev, lis_end);
+	mark_lis(stack_a, prev, find_lis_end(len, ft_lstsize(stack_a)));
 	free(array);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithm.c                                        :+:      :+:    :+:   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/22 16:13:51 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/22 16:22:14 by lde-frei         ###   ########.fr       */
+/*   Created: 2026/02/17 14:29:36 by lde-frei          #+#    #+#             */
+/*   Updated: 2026/02/18 16:40:33 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ t_node	*get_cheapest(t_node *b)
 	t_node	*cheap;
 
 	cheap = b;
-	min = ABS(b->cost_a) + ABS(b->cost_b);
+	min = absolut(b->cost_a) + absolut(b->cost_b);
 	while (b)
 	{
-		cost = ABS(b->cost_a) + ABS(b->cost_b);
+		cost = absolut(b->cost_a) + absolut(b->cost_b);
 		if (cost < min)
 		{
 			min = cost;

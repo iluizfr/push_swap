@@ -24,5 +24,6 @@ fclean: clean
 re: fclean all
 
 build: all clean
+	@clear
 
 .PHONY: all clean fclean re

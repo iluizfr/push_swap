@@ -6,7 +6,7 @@
 /*   By: lde-frei <lde-frei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 16:21:22 by lde-frei          #+#    #+#             */
-/*   Updated: 2026/01/18 18:16:36 by lde-frei         ###   ########.fr       */
+/*   Updated: 2026/02/18 15:00:21 by lde-frei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ char	*ft_substr(const char *str, int start, int len)
 
 void	sort_int_tab(int *tab, int len)
 {
-	int i;
-	int j;
-	int tmp;
+	int	i;
+	int	j;
+	int	tmp;
 
 	i = 0;
 	while (i < len - 1)
@@ -95,5 +95,5 @@ void	sort_int_tab(int *tab, int len)
 			j++;
 		}
 		i++;
-	}	
+	}
 }
